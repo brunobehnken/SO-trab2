@@ -18,8 +18,7 @@ int main(int argc, char *argv[])
     noCabeca = MPLivre = malloc(sizeof(ESPACOLIVRE));
     noCabeca->inicio = 0;
     noCabeca->fim = tamMemo;
-    printaEspacosLivres();
-    testaAlocacaoDeSegmentosNaMemoria();
+    menuPrincipal();
 
     return 0;
 }

@@ -9,7 +9,30 @@ void comoUsar (char* progName, char* argumentos)
 }
 
 void menuPrincipal () {
-    printf("Bem-vindo, \n");
+    int option = 10;
+
+    printf("\tBem-vindo, usuario!\n");
+    printf("Digite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real\nDigite 0 para sair;\n");
+    while (option != 0) {
+        scanf("%d", &option);
+        switch (option) {
+            case 0:
+                printf("Bye-bye~\n");
+                break;
+            case 1:
+                // insere um processo na tabela de processos
+                break;
+            case 2:
+                // retira um processo da tabela de processos
+                break;
+            case 3:
+                // acessa um endereco real segundo uma base de segmento e um offset
+                break;
+            default:
+                printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real\nDigite 0 para sair;\n");
+                break;
+        }
+    }
 }
 
 void printaEspacosLivres () {
