@@ -16,6 +16,8 @@ typedef struct _PROCESSO
 	LINHA *segTable;
 } PROCESSO;
 
-void criaProcesso(int pid, int numSeg);
+PROCESSO *listaProc;
+
+PROCESSO* criaProcesso(int pid, int numSeg, int* tamanhos);
 	
 #endif
