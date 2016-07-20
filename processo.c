@@ -46,7 +46,7 @@ void retiraProcesso(int pid){
     int i;
     for (i = 0; i < tamanhoListaProc(listaProc); ++i)
     {
-        if (listaProc[i].pid == pid){  
+        if (listaProc[i].pid == pid){
             free(listaProc[i].segTable);
             free(&listaProc[i]);
             return;

@@ -1,7 +1,7 @@
 #ifndef PROCESSO_H
 #define PROCESSO_H
 
-typedef struct _LINHA 
+typedef struct _LINHA
 {
 	int bitPresenca;
 	int base;

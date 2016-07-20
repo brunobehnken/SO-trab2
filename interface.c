@@ -37,18 +37,24 @@ void menuPrincipal () {
 }
 
 void menuInsereProc() {
-	int pid, numSeg;
-	int *tamanhos;
-	int i;
-	printf("Digite Pid e quantidade de Segmentos: \n");
-	scanf(" %d %d ", &pid, &numSeg);
-	tamanhos = calloc(numSeg, sizeof(int));
-	for (int i = 0; i < count; ++i)
-	{
-		printf("Digite tamanho %d:\n",i);
-		scanf(" %d ", tamanhos[i]);
-	}
-	criaProcesso();
+    int pid, numSeg, *tamanhos, i;
+
+    printf("Digite o PID e a quantidade de segmentos: ");
+    scanf(" %d %d ", &pid, &numSeg);
+    while (!(pid > 0 || numSeg > 0))
+    {
+        printf("\t>> Valor inválido! <<\nDigite o PID e a quantidade de segmentos: ");
+        scanf(" %d %d ", &pid, &numSeg);
+    }
+    tamanhos = calloc(numSeg, sizeof(int));
+
+    for (i = 0; i < numSeg; ++i)
+    {
+        printf("Digite o tamanho do segmento %d: ", i);
+        scanf(" %d ", tamanhos[i]);
+    }
+
+    insereProcesso(criaProcesso(pid, numSeg, tamanhos));
 }
 
 void printaEspacosLivres () {
