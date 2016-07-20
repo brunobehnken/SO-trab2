@@ -82,6 +82,10 @@ void menuRetiraProc() {
     printf("Este PID ainda nao foi inserido! Voce pode inseri-lo seguindo as instrucoes da opcao 1.\n");
 }
 
+void menuAcessaSegmento() {
+    
+}
+
 void printaProcessos() {
     int i, j;
     printf("Processos no sistema:\n");
