@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 {
     int tamMemo;
     ESPACOLIVRE *MPLivre;
+    SEGMENTOALOCADO *cabecaSeg;
 
     if (argc != 2)
     {
@@ -18,6 +19,10 @@ int main(int argc, char *argv[])
     noCabeca = MPLivre = malloc(sizeof(ESPACOLIVRE));
     noCabeca->inicio = 0;
     noCabeca->fim = tamMemo;
+    cabecaSeg = criaSegmentoAlocado(0,0);
+    inicioSegAloc = cabecaSeg;
+    fimSegAloc = cabecaSeg;
+
     menuPrincipal();
 
     return 0;

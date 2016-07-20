@@ -14,21 +14,50 @@ SEGMENTOALOCADO* criaSegmentoAlocado(int pidProcesso, int numSeg){
     temp->numSeg = numSeg;
     temp->idade = 0;
     temp->prox = NULL;
+    temp->ant = NULL;
     return temp;
 }
 
 void insereSegmentoAlocado(SEGMENTOALOCADO *segmento) {
-    // int tamAntigo = tamListaSeg;
-    // printf("%d\n", tamListaSeg);
-    listaSegAloc = realloc(listaSegAloc, ++tamListaSeg * sizeof(PROCESSO));
-    if (!listaSegAloc)
-    {
-        printf("funcao insereSegmentoAlocado: Erro ao alocar memoria do listaSegAloc com realloc\n");
-        exit(-1);
-    }
-    // listaSegAloc[tamAntigo] = *segmento;
+	segmento->ant = fimSegAloc;
+	fimSegAloc->prox = segmento;
+	fimSegAloc = fimSegAloc->prox;
+}
+
+ESPACOLIVRE *escolheLRU() {
+	int maxIdade = 0;
+	SEGMENTOALOCADO *atual;
+	SEGMENTOALOCADO *ptrRet;
+
+	atual = inicioSegAloc->prox;
+	ptrRet = atual;
+
+	while (atual) {
+		if (atual->idade > maxIdade) {
+			maxIdade = atual->idade;
+			ptrRet = atual;
+		}
+		atual = atual->prox;
+	}
+	return ptrRet;
+}
+
+void somaLRU(SEGMENTOALOCADO *segmento) {
+	SEGMENTOALOCADO *atual;
+
+	atual = inicioSegAloc->prox;
+
+	while (atual) {
+		atual->idade++;
+		atual = atual->prox;
+	}
+
+	atual = inicioSegAloc->prox;
+	segmento->idade = 0;
 }
 
 void desalocaSegmento(SEGMENTOALOCADO *segmento) {
-
+	segmento->prox->ant = segmento->ant;
+	segmento->ant->prox = segmento->prox;
+	free(segmento);
 }

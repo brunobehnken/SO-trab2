@@ -6,12 +6,12 @@ typedef struct _SEGMENTOALOCADO
 	int pidProcesso;
 	int numSeg;
 	int idade;
+    struct _SEGMENTOALOCADO *ant;
     struct _SEGMENTOALOCADO *prox;
 } SEGMENTOALOCADO;
 
-SEGMENTOALOCADO *listaSegAloc;
-
-int tamListaSeg;
+SEGMENTOALOCADO *inicioSegAloc;
+SEGMENTOALOCADO *fimSegAloc;
 
 SEGMENTOALOCADO* criaSegmentoAlocado(int pidProcesso, int numSeg);
 void insereSegmentoAlocado(SEGMENTOALOCADO *segmento);

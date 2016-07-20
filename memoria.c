@@ -13,7 +13,7 @@ ESPACOLIVRE *buscaEspacoLivre (int tam, ESPACOLIVRE *noAtual) {
     if (!noAtual) //memoria cheia
     {
         // chama algoritmo de realocacao
-
+    	
         return NULL;
     } else {
         if ((noAtual->fim - noAtual->inicio) >= tam) {
