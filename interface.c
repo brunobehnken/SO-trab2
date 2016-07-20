@@ -55,6 +55,21 @@ void menuInsereProc() {
     }
 
     insereProcesso(criaProcesso(pid, numSeg, tamanhos));
+    printaProcessos();
+}
+
+void printaProcessos() {
+    int i, j;
+    printf("Processos no sistema:\n");
+    for (i = 0; i < tamListaProc; ++i)
+    {
+        printf(">> PID: %d; SEGMENTOS:\n\t", listaProc[i].pid);
+        for (j = 0; j < listaProc[i].numSeg; ++j)
+        {
+            printf("%d ", listaProc[i].segTable[j].tamanho);
+        }
+        printf("\n");
+    }
 }
 
 void printaEspacosLivres () {

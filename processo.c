@@ -21,19 +21,15 @@ PROCESSO* criaProcesso(int pid, int numSeg, int* tamanhos) {
     for (i = 0; i < numSeg; ++i)
     {
         temp->segTable[i].tamanho = tamanhos[i];
+        temp->segTable[i].bitPresenca = 0;
     }
     return temp;
 }
 
-int tamanhoListaProc(PROCESSO* vetor) {
-    int d = sizeof(vetor)/sizeof(vetor[0]);
-    printf("%d\n", d);
-    return d;
-}
-
 void insereProcesso(PROCESSO *processo) {
-    int tamAntigo = tamanhoListaProc(listaProc);
-    listaProc = realloc(listaProc, (tamAntigo + 1) * sizeof(PROCESSO));
+    int tamAntigo = tamListaProc;
+    printf("%d\n", tamListaProc);
+    listaProc = realloc(listaProc, ++tamListaProc * sizeof(PROCESSO));
     if (!listaProc)
     {
         printf("funcao criaProcesso: Erro ao alocar memoria do temp->segTable com calloc\n");
@@ -44,11 +40,12 @@ void insereProcesso(PROCESSO *processo) {
 
 void retiraProcesso(int pid){
     int i;
-    for (i = 0; i < tamanhoListaProc(listaProc); ++i)
+    for (i = 0; i < tamListaProc; ++i)
     {
         if (listaProc[i].pid == pid){
             free(listaProc[i].segTable);
             free(&listaProc[i]);
+            tamListaProc--;
             return;
         }
     }

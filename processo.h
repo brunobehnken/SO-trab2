@@ -18,9 +18,10 @@ typedef struct _PROCESSO
 
 PROCESSO *listaProc;
 
+int tamListaProc;
+
 PROCESSO* criaProcesso(int pid, int numSeg, int* tamanhos);
 void insereProcesso(PROCESSO *processo);
 void retiraProcesso(int pid);
-int tamanhoListaProc(PROCESSO* vetor);
 
 #endif

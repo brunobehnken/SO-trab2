@@ -6,6 +6,7 @@
 void comoUsar (char* progName, char* argumentos);
 void menuPrincipal ();
 void menuInsereProc();
+void printaProcessos();
 void printaEspacosLivres ();
 void testaAlocacaoDeSegmentosNaMemoria ();
 
