@@ -40,9 +40,8 @@ void testaAlocacaoDeSegmentosNaMemoria () {
         printf("Segmento de tamanho %d entra.\n", tamSegmento);
         alocarSegmento(tamSegmento);
         printaEspacosLivres();
-
-        printf("Deseja alocar outro segmento? (y/n) ");
-        scanf("%c", &resposta);
+        printf("Deseja alocar outro segmento? (y/n) \n");
+        scanf(" %c", &resposta);
         if (!(resposta == 'Y' || resposta == 'y'))
         {
             printf("See ya~\n");
