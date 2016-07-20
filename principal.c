@@ -19,42 +19,7 @@ int main(int argc, char *argv[])
     noCabeca->inicio = 0;
     noCabeca->fim = tamMemo;
     printaEspacosLivres();
-
-    printf("Segmento de tamanho 25 entra.\n");
-    alocarSegmento(25);
-    printaEspacosLivres();
-
-    printf("Segmento de tamanho 13 entra.\n");
-    alocarSegmento(13);
-    printaEspacosLivres();
-
-    printf("Segmento de tamanho 7 entra.\n");
-    alocarSegmento(7);
-    printaEspacosLivres();
-
-    printf("Segmento de tamanho 10 entra.\n");
-    alocarSegmento(10);
-    printaEspacosLivres();
-
-    printf("Segmento de tamanho 30 entra.\n");
-    alocarSegmento(30);
-    printaEspacosLivres();
-
-    printf("Segmento de base 25, tamanho 13\n");
-    freeSegmento(25, 13);
-    printaEspacosLivres();
-
-    printf("Segmento de base 45, tamanho 10\n");
-    freeSegmento(45, 10);
-    printaEspacosLivres();
-
-    printf("Segmento de tamanho 11 entra.\n");
-    alocarSegmento(11);
-    printaEspacosLivres();
-
-    printf("Segmento de tamanho 4 entra.\n");
-    alocarSegmento(4);
-    printaEspacosLivres();
+    testaAlocacaoDeSegmentosNaMemoria();
 
     return 0;
 }

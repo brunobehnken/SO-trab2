@@ -23,3 +23,30 @@ void printaEspacosLivres () {
     }
     printf("\n");
 }
+
+void testaAlocacaoDeSegmentosNaMemoria () {
+    int tamSegmento = 0, keepRunning = 1;
+    char resposta;
+
+    while (keepRunning) {
+        printf("Digite um valor inteiro maior que zero para o tamanho do segmento que deseja alocar: ");
+        scanf("%d", &tamSegmento);
+
+        while (!(tamSegmento > 0)) {
+            printf("\n\t>> Valor invalido!!! <<\n\nDigite um valor inteiro maior que zero para o tamanho do segmento que deseja alocar: ");
+            scanf("%d", &tamSegmento);
+        }
+
+        printf("Segmento de tamanho %d entra.\n", tamSegmento);
+        alocarSegmento(tamSegmento);
+        printaEspacosLivres();
+
+        printf("Deseja alocar outro segmento? (y/n) ");
+        scanf("%c", &resposta);
+        if (!(resposta == 'Y' || resposta == 'y'))
+        {
+            printf("See ya~\n");
+            keepRunning = 0;
+        }
+    }
+}
