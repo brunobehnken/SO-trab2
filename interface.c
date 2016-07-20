@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "interface.h"
+#include "processo.h"
 
 void comoUsar (char* progName, char* argumentos)
 {
@@ -20,7 +21,7 @@ void menuPrincipal () {
                 printf("Bye-bye~\n");
                 break;
             case 1:
-                // insere um processo na tabela de processos
+                menuInsereProc();
                 break;
             case 2:
                 // retira um processo da tabela de processos
@@ -33,6 +34,21 @@ void menuPrincipal () {
                 break;
         }
     }
+}
+
+void menuInsereProc() {
+	int pid, numSeg;
+	int *tamanhos;
+	int i;
+	printf("Digite Pid e quantidade de Segmentos: \n");
+	scanf(" %d %d ", &pid, &numSeg);
+	tamanhos = calloc(numSeg, sizeof(int));
+	for (int i = 0; i < count; ++i)
+	{
+		printf("Digite tamanho %d:\n",i);
+		scanf(" %d ", tamanhos[i]);
+	}
+	criaProcesso();
 }
 
 void printaEspacosLivres () {

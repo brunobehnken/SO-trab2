@@ -24,3 +24,33 @@ PROCESSO* criaProcesso(int pid, int numSeg, int* tamanhos) {
     }
     return temp;
 }
+
+int tamanhoListaProc(PROCESSO* vetor) {
+    int d = sizeof(vetor)/sizeof(PROCESSO);
+    printf("%d\n", d);
+    return d;
+}
+
+void insereProcesso(PROCESSO *processo) {
+    int tamAntigo = tamanhoListaProc(listaProc);
+    listaProc = realloc(listaProc, (tamAntigo + 1) * sizeof(PROCESSO));
+    if (!listaProc)
+    {
+        printf("funcao criaProcesso: Erro ao alocar memoria do temp->segTable com calloc\n");
+        exit(-1);
+    }
+    listaProc[tamAntigo] = *processo;
+}
+
+void retiraProcesso(int pid){
+    int i;
+    for (i = 0; i < tamanhoListaProc(listaProc); ++i)
+    {
+        if (listaProc[i].pid == pid){  
+            free(listaProc[i].segTable);
+            free(&listaProc[i]);
+            return;
+        }
+    }
+    printf("Funcao retiraProcesso: PID %d nao encontrado\n", pid);
+}
