@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "memoria.h"
+#include "segmento.h"
 
 void alocarSegmento (int tam) {
     ESPACOLIVRE *match = buscaEspacoLivre(tam, noCabeca);
@@ -9,9 +10,10 @@ void alocarSegmento (int tam) {
 }
 
 ESPACOLIVRE *buscaEspacoLivre (int tam, ESPACOLIVRE *noAtual) {
-    if (!noAtual)
+    if (!noAtual) //memoria cheia
     {
         // chama algoritmo de realocacao
+
         return NULL;
     } else {
         if ((noAtual->fim - noAtual->inicio) >= tam) {

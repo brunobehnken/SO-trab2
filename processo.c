@@ -32,7 +32,7 @@ void insereProcesso(PROCESSO *processo) {
     listaProc = realloc(listaProc, ++tamListaProc * sizeof(PROCESSO));
     if (!listaProc)
     {
-        printf("funcao criaProcesso: Erro ao alocar memoria do temp->segTable com calloc\n");
+        printf("funcao insereProcesso: Erro ao alocar memoria do temp->segTable com calloc\n");
         exit(-1);
     }
     listaProc[tamAntigo] = *processo;
