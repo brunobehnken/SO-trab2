@@ -9,7 +9,7 @@ void comoUsar (char* progName, char* argumentos)
 }
 
 void menuPrincipal () {
-    
+    printf("Bem-vindo, \n");
 }
 
 void printaEspacosLivres () {
@@ -40,7 +40,7 @@ void testaAlocacaoDeSegmentosNaMemoria () {
         printf("Segmento de tamanho %d entra.\n", tamSegmento);
         alocarSegmento(tamSegmento);
         printaEspacosLivres();
-        printf("Deseja alocar outro segmento? (y/n) \n");
+        printf("Deseja alocar outro segmento? (y/n) ");
         scanf(" %c", &resposta);
         if (!(resposta == 'Y' || resposta == 'y'))
         {
