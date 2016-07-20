@@ -24,7 +24,7 @@ void menuPrincipal () {
                 menuInsereProc();
                 break;
             case 2:
-                // retira um processo da tabela de processos
+                menuRetiraProc();
                 break;
             case 3:
                 // acessa um endereco real segundo uma base de segmento e um offset
@@ -56,6 +56,30 @@ void menuInsereProc() {
 
     insereProcesso(criaProcesso(pid, numSeg, tamanhos));
     printaProcessos();
+}
+
+void menuRetiraProc() {
+    int pid, i;
+
+    printf("Digite um dos PIDs listados a seguir para finaliza-lo:\n");
+    printaProcessos();
+    scanf(" %d", &pid);
+    while(!(pid > 0)) {
+        printf("Valor de PID invalido, escolha um valor maior que zero: ");
+        scanf(" %d", &pid);
+    }
+
+    for (i = 0; i < tamListaProc; ++i)
+    {
+        if (listaProc[i].pid == pid)
+        {
+            retiraProcesso(pid);
+            printf(">> Processo %d retirado com sucesso!\n", pid);
+            printaProcessos();
+            return;
+        }
+    }
+    printf("Este PID ainda nao foi inserido! Voce pode inseri-lo seguindo as instrucoes da opcao 1.\n");
 }
 
 void printaProcessos() {
