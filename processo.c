@@ -26,7 +26,7 @@ PROCESSO* criaProcesso(int pid, int numSeg, int* tamanhos) {
 }
 
 int tamanhoListaProc(PROCESSO* vetor) {
-    int d = sizeof(vetor)/sizeof(PROCESSO);
+    int d = sizeof(vetor)/sizeof(vetor[0]);
     printf("%d\n", d);
     return d;
 }
