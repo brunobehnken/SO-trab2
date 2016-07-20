@@ -64,7 +64,7 @@ void menuRetiraProc() {
     printf("Digite um dos PIDs listados a seguir para finaliza-lo:\n");
     printaProcessos();
     scanf(" %d", &pid);
-    while(!(pid > 0)) {
+    while(!(pid >= 0)) {
         printf("Valor de PID invalido, escolha um valor maior que zero: ");
         scanf(" %d", &pid);
     }
@@ -83,7 +83,7 @@ void menuRetiraProc() {
 }
 
 void menuAcessaSegmento() {
-    
+
 }
 
 void printaProcessos() {
