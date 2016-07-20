@@ -8,6 +8,10 @@ void comoUsar (char* progName, char* argumentos)
     exit(0);
 }
 
+void menuPrincipal () {
+    
+}
+
 void printaEspacosLivres () {
     ESPACOLIVRE *noAtual = noCabeca;
     printf("(%d, %d)", noAtual->inicio, noAtual->fim);
