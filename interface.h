@@ -9,6 +9,7 @@ void menuInsereProc();
 void menuRetiraProc();
 void menuAcessaSegmento();
 int printaSegmentos(int pid);
+void printaIdadeSegmentos();
 void printaProcessos();
 void printaEspacosLivres ();
 

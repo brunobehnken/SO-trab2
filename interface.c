@@ -166,6 +166,10 @@ int printaSegmentos(int pid) {
     return indice;
 }
 
+void printaIdadeSegmentos() {
+    
+}
+
 void printaProcessos() {
     int i, j;
     printf("Processos no sistema:\n");
