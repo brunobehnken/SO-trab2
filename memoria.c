@@ -8,33 +8,47 @@ void alocarSegmento (int tam, int pid, int numSeg) {
     int i;
 
     ESPACOLIVRE *match = buscaEspacoLivre(tam, pid, numSeg, noCabeca);
-    match->inicio += tam;
     // marcar na tabela de segmentos que o segmento foi alocado
     for (i = 0; i < tamListaProc; ++i)
     {
         if (listaProc[i].pid == pid) {
             listaProc[i].segTable[numSeg].bitPresenca = 1;
+            listaProc[i].segTable[numSeg].base = match->inicio;
+            listaProc[i].segTable[numSeg].tamanho = tam;
+            
+            break;
         }
     }
+    match->inicio += tam;
+    insereSegmentoAlocado(criaSegmentoAlocado(pid, numSeg));
 }
 
 ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtual) {
-    int i, indice, segOut;
+    int i, indice, segOut, pidVelho;
     SEGMENTOALOCADO *velho;
     if (!noAtual) //memoria cheia
     {
         // chama algoritmo de realocacao
-        segOut = desalocaSegmento(velho = escolheLRU()); //dizendo q segmento nao ta mais na memoria. Retorna o segmento q saiu.
-
+        velho = escolheLRU();
+        pidVelho = velho->pidProcesso;
+        //printf("\nPid Velho: %d\n", velho->pidProcesso);
+        segOut = desalocaSegmento(velho); //dizendo q segmento nao ta mais na memoria. Retorna o segmento q saiu.
+		//printf("\nPid Velho: %d\n", velho->pidProcesso);
         for (i = 0; i < tamListaProc; ++i){
-            if (listaProc[i].pid == velho->pidProcesso) {
+            if (listaProc[i].pid == pidVelho) {
+				//printf("\ni: %d\n", i);
                 indice = i;
                 break;
             }
         }
+        printf("\ntamListaProc: %d\n",tamListaProc);
+        printf("indice: %d\n", indice);
+        printf("Numero de Segmentos do Processo: %d\n",listaProc[indice].numSeg);
+        printf("Base do Segmento q vai sair: %d\n",listaProc[indice].segTable[segOut].base);
         freeSegmento(listaProc[indice].segTable[segOut].base , tam); //liberando memoria
 
         listaProc[indice].segTable[segOut].bitPresenca = 0;
+
         return buscaEspacoLivre(tam, pid, numSeg, noCabeca);
     } else {
         if ((noAtual->fim - noAtual->inicio) >= tam) {
@@ -47,6 +61,7 @@ ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtua
 
 void freeSegmento (int base, int tam) {
     ESPACOLIVRE *noLiberto;
+    
     if (!(noLiberto = calloc(tam, sizeof(ESPACOLIVRE))))
     {
         printf("funcao freeSegmento: Erro ao alocar memoria do noLiberto com calloc\n");

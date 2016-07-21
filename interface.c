@@ -139,7 +139,6 @@ void menuAcessaSegmento() {
             printf("Valor de bit de presenca nao esperado! O gerenciador de memoria vai cometer suicidio!\n");
             exit(-1);
     }
-
     printf("Segmento %d do processo de PID %d em memoria;\nSeu endereco real eh: %d\nO endereco real da instrucao eh: %d\n", segmento, pid, listaProc[indice].segTable[segmento].base, listaProc[indice].segTable[segmento].base + offset);
 }
 

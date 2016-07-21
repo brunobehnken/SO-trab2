@@ -39,6 +39,7 @@ SEGMENTOALOCADO *escolheLRU() {
 		}
 		atual = atual->prox;
 	}
+
 	return ptrRet;
 }
 
@@ -72,6 +73,7 @@ SEGMENTOALOCADO *buscaSegmento(int pidProcesso){
 		if(atual->pidProcesso == pidProcesso){
 			return atual;
 		}
+		atual = atual->prox;
 	}
 	return NULL;	
 }
