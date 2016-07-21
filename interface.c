@@ -84,7 +84,7 @@ void menuRetiraProc() {
 }
 
 void menuAcessaSegmento() {
-    int i, pid, segmento, indice, offset;
+    int i, pid, segmento, indice, offset, teste = 0;
 
     printf("Escolha um dos PIDs listados a seguir:\n");
     printaProcessos();
@@ -99,11 +99,13 @@ void menuAcessaSegmento() {
         {
             if (listaProc[i].pid == pid)
             {
-                retiraProcesso(pid);
-                printf(">> Processo %d retirado com sucesso!\n", pid);
-                printaProcessos();
-                return;
+                teste = 1;
+                break;
             }
+        }
+        if (teste)
+        { // soh para sair do while se achar o pid
+            break;
         }
         printf("Valor de PID invalido, escolha um dos valores listados:");
         printaProcessos();
