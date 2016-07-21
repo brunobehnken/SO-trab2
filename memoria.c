@@ -108,7 +108,7 @@ void liberaMemoria (ESPACOLIVRE *noLiberto) {
         noProx = noAtual->prox; // atualizando o noProx
         if (noAtual->inicio > noLiberto->inicio) // checando se noLiberto estah a esquerda do noAtual
         {
-            if (noLiberto->fim == noAtual->inicio) // checando se ha colisao entre o fim do liberto e o incio do atual
+            if (noLiberto->fim == noAtual->inicio) // checando se ha colisao entre o fim do liberto e o inicio do atual
             {
                 // mergeando nohs
                 noAtual->inicio = noLiberto->inicio;
@@ -122,6 +122,8 @@ void liberaMemoria (ESPACOLIVRE *noLiberto) {
                     noAnterior->prox = noLiberto;
                     break;
                 } else {
+                    printf("\n>>>>>>>>>>>>>>>>>> noCabeca->inicio = %d; noCabeca->fim = %d\n", noCabeca->inicio, noCabeca->fim);
+                    printf("\n>>>>>>>>>>>>>>>>>> noLiberto->inicio = %d; noLiberto->fim = %d\n", noLiberto->inicio, noLiberto->fim);
                     noCabeca = noLiberto;
                     break;
                 }
