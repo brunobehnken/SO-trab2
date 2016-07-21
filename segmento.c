@@ -56,8 +56,22 @@ void somaLRU(SEGMENTOALOCADO *segmento) {
 	segmento->idade = 0;
 }
 
-void desalocaSegmento(SEGMENTOALOCADO *segmento) {
+int desalocaSegmento(SEGMENTOALOCADO *segmento) {
+	int segOut = segmento->numSeg;
+
 	segmento->prox->ant = segmento->ant;
 	segmento->ant->prox = segmento->prox;
 	free(segmento);
+
+	return segOut;
+}
+
+SEGMENTOALOCADO *buscaSegmento(int pidProcesso){
+	SEGMENTOALOCADO *atual = inicioSegAloc->prox;
+	while(atual){
+		if(atual->pidProcesso == pidProcesso){
+			return atual;
+		}
+	}
+	return NULL;	
 }
