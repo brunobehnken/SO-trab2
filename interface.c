@@ -14,7 +14,7 @@ void menuPrincipal () {
     int option = 10;
 
     printf("\tBem-vindo, usuario!\n");
-    printf("Digite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os Processos e seus segmentos;\nDigite 0 para sair;\n");
+    printf("Digite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os Processos e seus segmentos;\nDigite 6 para ver as idades dos segmentos presentes na memoria;\nDigite 0 para sair;\n");
     while (option != 0) {
         scanf("%d", &option);
         switch (option) {
@@ -36,8 +36,11 @@ void menuPrincipal () {
             case 5:
                 printaProcessos();
                 break;
+            case 6:
+                void printaIdadeSegmentos();
+                break;
             default:
-                printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real;\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os Processos e seus segmentos;\nDigite 0 para sair;\n");
+                printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real;\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os Processos e seus segmentos;\nDigite 6 para ver as idades dos segmentos presentes na memoria;\nDigite 0 para sair;\n");
                 break;
         }
     }
@@ -164,6 +167,15 @@ int printaSegmentos(int pid) {
         printf("Segmento %d: %d\n", i, listaProc[indice].segTable[i].tamanho);
     }
     return indice;
+}
+
+void printaIdadeSegmentos() {
+    SEGMENTOALOCADO *segmentos = inicioSegAloc->prox;
+    printf(">> Numero do segmento; PID; idade:\n");
+    while(segmentos) {
+        printf("\t%d; %d; %d\n", segmentos->numSeg, segmentos->pidProcesso, segmentos->idade);
+        segmentos = segmentos->prox;
+    }
 }
 
 void printaProcessos() {
