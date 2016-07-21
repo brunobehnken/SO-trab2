@@ -11,6 +11,5 @@ void menuAcessaSegmento();
 int printaSegmentos(int pid);
 void printaProcessos();
 void printaEspacosLivres ();
-void testaAlocacaoDeSegmentosNaMemoria ();
 
 #endif

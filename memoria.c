@@ -18,18 +18,25 @@ void alocarSegmento (int tam, int pid, int numSeg) {
     }
 }
 
-ESPACOLIVRE *buscaEspacoLivre (int tam, ESPACOLIVRE *noAtual) {
+ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtual) {
+    int i, indice;
     if (!noAtual) //memoria cheia
     {
-    	desalocaSegmento(escolheLRU());
-        // chama algoritmo de realocacao
-
-        return NULL;
+		// chama algoritmo de realocacao
+		for (i = 0; i < tamListaProc; ++i){
+			if (listaProc[i].pid == pid) {
+				indice = i;
+				break;
+			}
+		}
+		freeSegmento(listaProc[indice].segTable[numSeg].base , tam); //liberando memoria
+    	desalocaSegmento(escolheLRU()); //dizendo q segmento nao ta mais na memoria
+        return buscaEspacoLivre(tam, pid, numSeg, noCabeca);
     } else {
         if ((noAtual->fim - noAtual->inicio) >= tam) {
             return noAtual;
         } else {
-            return buscaEspacoLivre(tam, noAtual->prox);
+            return buscaEspacoLivre(tam, pid, numSeg, noAtual->prox);
         }
     }
 }

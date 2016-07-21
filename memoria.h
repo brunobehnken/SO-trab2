@@ -9,8 +9,8 @@ typedef struct _ESPACOLIVRE
 
 ESPACOLIVRE *noCabeca;
 
-void alocarSegmento (int tam);
-ESPACOLIVRE *buscaEspacoLivre (int tam, ESPACOLIVRE *noAtual);
+void alocarSegmento (int tam, int pid, int numSeg);
+ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtual);
 void freeSegmento (int base, int tam);
 void liberaMemoria (ESPACOLIVRE *noLiberto);
 

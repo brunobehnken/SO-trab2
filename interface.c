@@ -83,7 +83,7 @@ void menuRetiraProc() {
 }
 
 void menuAcessaSegmento() {
-    int pid, segmento, indice, offset;
+    int i, pid, segmento, indice, offset;
 
     printf("Escolha um dos PIDs listados a seguir:\n");
     printaProcessos();
@@ -93,7 +93,7 @@ void menuAcessaSegmento() {
         scanf(" %d", &pid);
     }
 
-    while(true) {
+    while(1) {
         for (i = 0; i < tamListaProc; ++i)
         {
             if (listaProc[i].pid == pid)
@@ -110,11 +110,11 @@ void menuAcessaSegmento() {
     }
 
     printf("Escolha um segmento dentre os listados abaixo:\n");
-    indice = printaSegmentos();
+    indice = printaSegmentos(pid);
     scanf(" %d", &segmento);
     while(!(segmento < listaProc[indice].numSeg)) {
         printf("Valor de segmento invalido, escolha um dos valores listados:");
-        printaSegmentos();
+        printaSegmentos(pid);
         scanf(" %d", &segmento);
     }
 
@@ -125,7 +125,7 @@ void menuAcessaSegmento() {
         scanf(" %d", &offset);
     }
 
-    
+    //Aqui temos PID, numSeg e offset definidos.
 }
 
 int printaSegmentos(int pid) {
@@ -143,6 +143,7 @@ int printaSegmentos(int pid) {
     {
         printf("Segmento %d: %d\n", i, listaProc[indice].segTable[i].tamanho);
     }
+    return indice;
 }
 
 void printaProcessos() {
@@ -169,30 +170,4 @@ void printaEspacosLivres () {
         noAtual = noAtual->prox;
     }
     printf("\n");
-}
-
-void testaAlocacaoDeSegmentosNaMemoria () {
-    int tamSegmento = 0, keepRunning = 1;
-    char resposta;
-
-    while (keepRunning) {
-        printf("Digite um valor inteiro maior que zero para o tamanho do segmento que deseja alocar: ");
-        scanf("%d", &tamSegmento);
-
-        while (!(tamSegmento > 0)) {
-            printf("\n\t>> Valor invalido!!! <<\n\nDigite um valor inteiro maior que zero para o tamanho do segmento que deseja alocar: ");
-            scanf("%d", &tamSegmento);
-        }
-
-        printf("Segmento de tamanho %d entra.\n", tamSegmento);
-        alocarSegmento(tamSegmento);
-        printaEspacosLivres();
-        printf("Deseja alocar outro segmento? (y/n) ");
-        scanf(" %c", &resposta);
-        if (!(resposta == 'Y' || resposta == 'y'))
-        {
-            printf("See ya~\n");
-            keepRunning = 0;
-        }
-    }
 }
