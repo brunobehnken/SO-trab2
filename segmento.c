@@ -53,7 +53,6 @@ void somaLRU(SEGMENTOALOCADO *segmento) {
 		atual = atual->prox;
 	}
 
-	//atual = inicioSegAloc->prox;
 	segmento->idade = 0;
 }
 

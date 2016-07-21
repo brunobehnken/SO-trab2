@@ -14,7 +14,7 @@ void menuPrincipal () {
     int option = 10;
 
     printf("\tBem-vindo, usuario!\n");
-    printf("Digite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os rocessos e seus segmentos;\nDigite 0 para sair;\n");
+    printf("Digite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os Processos e seus segmentos;\nDigite 0 para sair;\n");
     while (option != 0) {
         scanf("%d", &option);
         switch (option) {
@@ -37,7 +37,7 @@ void menuPrincipal () {
                 printaProcessos();
                 break;
             default:
-                printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real;\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os rocessos e seus segmentos;\nDigite 0 para sair;\n");
+                printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real;\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os Processos e seus segmentos;\nDigite 0 para sair;\n");
                 break;
         }
     }
