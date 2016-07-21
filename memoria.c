@@ -12,9 +12,9 @@ void alocarSegmento (int tam, int pid, int numSeg) {
     // marcar na tabela de segmentos que o segmento foi alocado
     for (i = 0; i < tamListaProc; ++i)
     {
-    	if (listaProc[i].pid == pid) {
-    		listaProc[i].segTable[numSeg].bitPresenca = 1;
-		}
+        if (listaProc[i].pid == pid) {
+            listaProc[i].segTable[numSeg].bitPresenca = 1;
+        }
     }
 }
 
@@ -23,17 +23,17 @@ ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtua
     SEGMENTOALOCADO *velho;
     if (!noAtual) //memoria cheia
     {
-		// chama algoritmo de realocacao
-		segOut = desalocaSegmento(velho = escolheLRU()); //dizendo q segmento nao ta mais na memoria. Retorna o segmento q saiu.
-		
-		for (i = 0; i < tamListaProc; ++i){
-			if (listaProc[i].pid == velho->pidProcesso) {
-				indice = i;
-				break;
-			}
-		}
-		freeSegmento(listaProc[indice].segTable[segOut].base , tam); //liberando memoria
-    	
+        // chama algoritmo de realocacao
+        segOut = desalocaSegmento(velho = escolheLRU()); //dizendo q segmento nao ta mais na memoria. Retorna o segmento q saiu.
+
+        for (i = 0; i < tamListaProc; ++i){
+            if (listaProc[i].pid == velho->pidProcesso) {
+                indice = i;
+                break;
+            }
+        }
+        freeSegmento(listaProc[indice].segTable[segOut].base , tam); //liberando memoria
+
         listaProc[indice].segTable[segOut].bitPresenca = 0;
         return buscaEspacoLivre(tam, pid, numSeg, noCabeca);
     } else {
