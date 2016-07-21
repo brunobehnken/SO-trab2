@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "interface.h"
 #include "processo.h"
+#include "segmento.h"
 
 void comoUsar (char* progName, char* argumentos)
 {
@@ -125,7 +126,17 @@ void menuAcessaSegmento() {
         scanf(" %d", &offset);
     }
 
-    //Aqui temos PID, numSeg e offset definidos.
+    // Aqui temos PID, numSeg e offset definidos.
+    switch(listaProc[indice].segTable[numSeg].bitPresenca) {
+        case 0:
+            alocarSegmento(listaProc[indice].segTable[segmento].tamanho, pid, numSeg);
+        case 1:
+            somaLRU(buscaSegmento(pid));
+            break;
+        default:
+            printf("Valor de bit de presenca nao esperado! O gerenciador de memoria vai cometer suicidio!\n");
+            exit(-1);
+    }
 }
 
 int printaSegmentos(int pid) {
