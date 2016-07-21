@@ -113,7 +113,7 @@ void menuAcessaSegmento() {
     printf("Escolha um segmento dentre os listados abaixo:\n");
     indice = printaSegmentos(pid);
     scanf(" %d", &segmento);
-    while(!(segmento < listaProc[indice].segmento)) {
+    while(!(segmento < listaProc[indice].numSeg)) {
         printf("Valor de segmento invalido, escolha um dos valores listados:");
         printaSegmentos(pid);
         scanf(" %d", &segmento);
