@@ -6,12 +6,9 @@
 
 void alocarSegmento (int tam, int pid, int numSeg) {
     int i;
-
-    ESPACOLIVRE *noAnterior = NULL;
     ESPACOLIVRE *noAtual = noCabeca;
-    ESPACOLIVRE *noProx = noAtual->prox;
 
-    ESPACOLIVRE *match = buscaEspacoLivre(tam, pid, numSeg, noCabeca);
+    ESPACOLIVRE *match = buscaEspacoLivre(tam, pid, numSeg, noAtual);
     // marcar na tabela de segmentos que o segmento foi alocado
     for (i = 0; i < tamListaProc; ++i)
     {
@@ -24,27 +21,6 @@ void alocarSegmento (int tam, int pid, int numSeg) {
         }
     }
     match->inicio += tam;
-
-    if (match->inicio == match->fim)
-    {
-        while (noAtual) {
-            if (noAtual == match)
-            {
-                noAnterior->prox = noProx;
-                free(noAtual);
-                break;
-            }
-            noAnterior = noAtual;
-            noAtual = noAtual->prox;
-            if (noAtual)
-            {
-                noProx = noAtual->prox;
-            } else {
-                noProx = NULL;
-            }
-        }
-    }
-
     insereSegmentoAlocado(criaSegmentoAlocado(pid, numSeg));
 }
 
@@ -56,25 +32,21 @@ ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtua
         // chama algoritmo de realocacao
         velho = escolheLRU();
         pidVelho = velho->pidProcesso;
-        //printf("\nPid Velho: %d\n", velho->pidProcesso);
+
         segOut = desalocaSegmento(velho); //dizendo q segmento nao ta mais na memoria. Retorna o segmento q saiu.
-		//printf("\nPid Velho: %d\n", velho->pidProcesso);
+
         for (i = 0; i < tamListaProc; ++i){
             if (listaProc[i].pid == pidVelho) {
-				//printf("\ni: %d\n", i);
                 indice = i;
                 break;
             }
         }
-        //printf("\ntamListaProc: %d\n",tamListaProc);
-        //printf("indice: %d\n", indice);
-        //printf("Numero de Segmentos do Processo: %d\n",listaProc[indice].numSeg);
-        //printf("Base do Segmento q vai sair: %d\n",listaProc[indice].segTable[segOut].base);
+
         freeSegmento(listaProc[indice].segTable[segOut].base , tam); //liberando memoria
 
         listaProc[indice].segTable[segOut].bitPresenca = 0;
-
-        return buscaEspacoLivre(tam, pid, numSeg, noCabeca);
+		noAtual = noCabeca; //Comecar de novo.
+        return buscaEspacoLivre(tam, pid, numSeg, noAtual);
     } else {
         if ((noAtual->fim - noAtual->inicio) >= tam) {
             return noAtual;
