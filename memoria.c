@@ -7,6 +7,10 @@
 void alocarSegmento (int tam, int pid, int numSeg) {
     int i;
 
+    ESPACOLIVRE *noAnterior = NULL;
+    ESPACOLIVRE *noAtual = noCabeca;
+    ESPACOLIVRE *noProx = noAtual->prox;
+
     ESPACOLIVRE *match = buscaEspacoLivre(tam, pid, numSeg, noCabeca);
     // marcar na tabela de segmentos que o segmento foi alocado
     for (i = 0; i < tamListaProc; ++i)
@@ -20,6 +24,27 @@ void alocarSegmento (int tam, int pid, int numSeg) {
         }
     }
     match->inicio += tam;
+
+    if (match->inicio == match->fim)
+    {
+        while (noAtual) {
+            if (noAtual == match)
+            {
+                noAnterior->prox = noProx;
+                free(noAtual);
+                break;
+            }
+            noAnterior = noAtual;
+            noAtual = noAtual->prox;
+            if (noAtual)
+            {
+                noProx = noAtual->prox;
+            } else {
+                noProx = NULL;
+            }
+        }
+    }
+
     insereSegmentoAlocado(criaSegmentoAlocado(pid, numSeg));
 }
 
@@ -124,33 +149,6 @@ void liberaMemoria (ESPACOLIVRE *noLiberto) {
                     break;
                 }
             }
-        }
-    }
-
-    noAnterior = NULL;
-    noAtual = noCabeca;
-    noProx = noAtual->prox;
-    while (noAtual) {
-        if (noAtual->inicio == noAtual->fim)
-        {
-            noAnterior->prox = noProx;
-            free(noAtual);
-            noAtual = noProx;
-            if (noAtual)
-            {
-                noProx = noAtual->prox;
-            } else {
-                noProx = NULL;
-            }
-            continue;
-        }
-        noAnterior = noAtual;
-        noAtual = noAtual->prox;
-        if (noAtual)
-        {
-            noProx = noAtual->prox;
-        } else {
-            noProx = NULL;
         }
     }
 }
