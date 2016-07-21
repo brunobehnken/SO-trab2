@@ -27,7 +27,7 @@ void menuPrincipal () {
                 menuRetiraProc();
                 break;
             case 3:
-                // acessa um endereco real segundo uma base de segmento e um offset
+                menuAcessaSegmento();
                 break;
             default:
                 printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real\nDigite 0 para sair;\n");
@@ -83,7 +83,31 @@ void menuRetiraProc() {
 }
 
 void menuAcessaSegmento() {
+    int pid;
 
+    printf("Escolha um dos PIDs listados a seguir:\n");
+    printaProcessos();
+    scanf(" %d", &pid);
+    while(!(pid >= 0)) {
+        printf("Valor de PID invalido, escolha um valor maior que zero: ");
+        scanf(" %d", &pid);
+    }
+
+    while(true) {
+        for (i = 0; i < tamListaProc; ++i)
+        {
+            if (listaProc[i].pid == pid)
+            {
+                retiraProcesso(pid);
+                printf(">> Processo %d retirado com sucesso!\n", pid);
+                printaProcessos();
+                return;
+            }
+        }
+        printf("Valor de PID invalido, escolha um dos valores listados:");
+        printaProcessos();
+        scanf(" %d", &pid);
+    }
 }
 
 void printaProcessos() {
