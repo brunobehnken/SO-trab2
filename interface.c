@@ -30,8 +30,14 @@ void menuPrincipal () {
             case 3:
                 menuAcessaSegmento();
                 break;
+            case 4:
+                printaEspacosLivres();
+                break;
+            case 5:
+                printaProcessos();
+                break;
             default:
-                printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real\nDigite 0 para sair;\n");
+                printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real;\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os rocessos e seus segmentos;\nDigite 0 para sair;\n");
                 break;
         }
     }
@@ -165,10 +171,10 @@ void printaProcessos() {
     printf("Processos no sistema:\n");
     for (i = 0; i < tamListaProc; ++i)
     {
-        printf(">> PID: %d; SEGMENTOS:\n\t", listaProc[i].pid);
+        printf(">> PID: %d; SEGMENTOS (bit de presenca: tamanho):\n\t", listaProc[i].pid);
         for (j = 0; j < listaProc[i].numSeg; ++j)
         {
-            printf("%d ", listaProc[i].segTable[j].tamanho);
+            printf("%d:%d ", listaProc[i].segTable[j].bitPresenca, listaProc[i].segTable[j].tamanho);
         }
         printf("\n");
     }
@@ -176,7 +182,7 @@ void printaProcessos() {
 
 void printaEspacosLivres () {
     ESPACOLIVRE *noAtual = noCabeca;
-    printf("(%d, %d)", noAtual->inicio, noAtual->fim);
+    printf("Espacos livres: (%d, %d)", noAtual->inicio, noAtual->fim);
     noAtual = noAtual->prox;
 
     while (noAtual) {
