@@ -72,7 +72,7 @@ ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtua
             }
         }
 
-        freeSegmento(listaProc[indice].segTable[segOut].base , tam); //liberando memoria
+        freeSegmento(listaProc[indice].segTable[segOut].base , listaProc[indice].segTable[segOut].tamanho); //liberando memoria
 
         listaProc[indice].segTable[segOut].bitPresenca = 0;
         noAtual = noCabeca; //Comecar de novo.
