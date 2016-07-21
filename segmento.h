@@ -18,5 +18,6 @@ void insereSegmentoAlocado(SEGMENTOALOCADO *segmento);
 SEGMENTOALOCADO *escolheLRU();
 void somaLRU(SEGMENTOALOCADO *segmento);
 void desalocaSegmento(SEGMENTOALOCADO *segmento);
+SEGMENTOALOCADO *buscaSegmento(int pidProcesso);
 
 #endif
