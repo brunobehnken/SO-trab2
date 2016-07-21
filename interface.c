@@ -83,7 +83,7 @@ void menuRetiraProc() {
 }
 
 void menuAcessaSegmento() {
-    int pid;
+    int pid, segmento, indice, offset;
 
     printf("Escolha um dos PIDs listados a seguir:\n");
     printaProcessos();
@@ -107,6 +107,41 @@ void menuAcessaSegmento() {
         printf("Valor de PID invalido, escolha um dos valores listados:");
         printaProcessos();
         scanf(" %d", &pid);
+    }
+
+    printf("Escolha um segmento dentre os listados abaixo:\n");
+    indice = printaSegmentos();
+    scanf(" %d", &segmento);
+    while(!(segmento < listaProc[indice].numSeg)) {
+        printf("Valor de segmento invalido, escolha um dos valores listados:");
+        printaSegmentos();
+        scanf(" %d", &segmento);
+    }
+
+    printf("Digite o offset desejado [0, %d]: ", listaProc[indice].segTable[segmento].tamanho - 1);
+    scanf(" %d", &offset);
+    while(offset >= listaProc[indice].segTable[segmento].tamanho || offset < 0) {
+        printf("\t>> Valor inválido! <<\nEscolha um offset dentro do intervalo [0, %d]: ", listaProc[indice].segTable[segmento].tamanho - 1);
+        scanf(" %d", &offset);
+    }
+
+    
+}
+
+int printaSegmentos(int pid) {
+    int i, indice;
+
+    for (i = 0; i < tamListaProc; ++i)
+    {
+        if (listaProc[i].pid == pid) {
+            indice = i;
+            break;
+        }
+    }
+
+    for (i = 0; i < listaProc[indice].numSeg; ++i)
+    {
+        printf("Segmento %d: %d\n", i, listaProc[indice].segTable[i].tamanho);
     }
 }
 
