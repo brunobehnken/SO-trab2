@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
     }
 
     sscanf(argv[1], "%d", &tamMemo);
+    tamanhoDaMemoria = tamMemo;
     noCabeca = MPLivre = malloc(sizeof(ESPACOLIVRE));
     noCabeca->inicio = 0;
     noCabeca->fim = tamMemo;

@@ -8,6 +8,7 @@ typedef struct _ESPACOLIVRE
 } ESPACOLIVRE;
 
 ESPACOLIVRE *noCabeca;
+int tamanhoDaMemoria;
 
 void alocarSegmento (int tam, int pid, int numSeg);
 ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtual);

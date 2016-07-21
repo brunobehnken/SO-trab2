@@ -7,6 +7,8 @@
 void alocarSegmento (int tam, int pid, int numSeg) {
     int i;
     ESPACOLIVRE *noAtual = noCabeca;
+    ESPACOLIVRE *noAnt = NULL;
+    ESPACOLIVRE *noProx;
 
     ESPACOLIVRE *match = buscaEspacoLivre(tam, pid, numSeg, noAtual);
     // marcar na tabela de segmentos que o segmento foi alocado
@@ -21,6 +23,42 @@ void alocarSegmento (int tam, int pid, int numSeg) {
         }
     }
     match->inicio += tam;
+
+    if (match->inicio == match->fim && match->inicio != tamanhoDaMemoria)
+    {
+        noAtual = noCabeca;
+        noProx = noAtual->prox;
+        printf("\n>>>>>> TEM UM PANACA INICIO = FIM\n");
+        while (noAtual) {
+            printf(">>>>>> PROCURANDO O PANACA DO INICIO = FIM\n");
+            printf(">>>>>> noAtual->inicio = %d; noAtual->fim = %d\n", noAtual->inicio, noAtual->fim);
+            printf(">>>>>> noCabeca->inicio = %d; noCabeca->fim = %d\n", noCabeca->inicio, noCabeca->fim);
+            if (noAtual->inicio == noAtual->fim)
+            {
+                printf(">>>>>> ENCONTREI O PANACA DO INICIO = FIM\n");
+                free(noAtual);
+                printf(">>>>>> noProx->inicio = %d; noProx->fim = %d\n", noProx->inicio, noProx->fim);
+                if (noAnt)
+                {
+                    noAnt->prox = noProx;
+                } else {
+                    noAtual = noCabeca = noProx;
+                }
+                break;
+            }
+
+            printf(">>>>>> PREPARANDO O PROXIMO LACO:\n");
+            noAnt = noAtual;
+            noAtual = noAtual->prox;
+            if (noAtual)
+            {
+                noProx = noAtual->prox;
+            } else {
+                printf(">>>>>> noAtual ficou NULL!\n");
+                noProx = NULL;
+            }
+        }
+    }
     insereSegmentoAlocado(criaSegmentoAlocado(pid, numSeg));
 }
 
@@ -45,7 +83,7 @@ ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtua
         freeSegmento(listaProc[indice].segTable[segOut].base , tam); //liberando memoria
 
         listaProc[indice].segTable[segOut].bitPresenca = 0;
-		noAtual = noCabeca; //Comecar de novo.
+        noAtual = noCabeca; //Comecar de novo.
         return buscaEspacoLivre(tam, pid, numSeg, noAtual);
     } else {
         if ((noAtual->fim - noAtual->inicio) >= tam) {
