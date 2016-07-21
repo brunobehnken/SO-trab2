@@ -127,6 +127,7 @@ void liberaMemoria (ESPACOLIVRE *noLiberto) {
                     if (noCabeca->inicio == tamanhoDaMemoria)
                     {
                         free(noCabeca);
+                        noLiberto->prox = NULL;
                     }
                     noCabeca = noLiberto;
                     break;
