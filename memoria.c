@@ -124,6 +124,7 @@ void liberaMemoria (ESPACOLIVRE *noLiberto) {
                 } else {
                     printf("\n>>>>>>>>>>>>>>>>>> noCabeca->inicio = %d; noCabeca->fim = %d\n", noCabeca->inicio, noCabeca->fim);
                     printf("\n>>>>>>>>>>>>>>>>>> noLiberto->inicio = %d; noLiberto->fim = %d\n", noLiberto->inicio, noLiberto->fim);
+                    free(noCabeca);
                     noCabeca = noLiberto;
                     break;
                 }
