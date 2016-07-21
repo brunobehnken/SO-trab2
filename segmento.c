@@ -24,7 +24,7 @@ void insereSegmentoAlocado(SEGMENTOALOCADO *segmento) {
 	fimSegAloc = fimSegAloc->prox;
 }
 
-ESPACOLIVRE *escolheLRU() {
+SEGMENTOALOCADO *escolheLRU() {
 	int maxIdade = 0;
 	SEGMENTOALOCADO *atual;
 	SEGMENTOALOCADO *ptrRet;

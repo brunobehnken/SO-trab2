@@ -15,5 +15,8 @@ SEGMENTOALOCADO *fimSegAloc;
 
 SEGMENTOALOCADO* criaSegmentoAlocado(int pidProcesso, int numSeg);
 void insereSegmentoAlocado(SEGMENTOALOCADO *segmento);
+SEGMENTOALOCADO *escolheLRU();
+void somaLRU(SEGMENTOALOCADO *segmento);
+void desalocaSegmento(SEGMENTOALOCADO *segmento);
 
 #endif

@@ -38,16 +38,39 @@ void insereProcesso(PROCESSO *processo) {
     listaProc[tamAntigo] = *processo;
 }
 
+void removeNull() {
+    int i, j = 0;
+    int tam = tamListaProc - 1;
+    PROCESSO *temp;
+
+    temp = calloc(tam, sizeof(PROCESSO));
+    if (!temp)
+    {
+        printf("funcao removeNull: Erro ao alocar memoria do temp com calloc\n");
+        exit(-1);
+    }
+    for (i = 0; i < tamListaProc; ++i)
+    {
+        if (listaProc[i].pid != -7) {
+            temp[j] = listaProc[i];
+            j++;
+        }
+    }
+    listaProc = temp;
+}
+
 void retiraProcesso(int pid){
     int i;
     for (i = 0; i < tamListaProc; ++i)
     {
         if (listaProc[i].pid == pid){
             free(listaProc[i].segTable);
-            free(&listaProc[i]);
+            listaProc[i].pid = -7;
+            removeNull();
             tamListaProc--;
             return;
         }
     }
     printf("Funcao retiraProcesso: PID %d nao encontrado\n", pid);
 }
+
