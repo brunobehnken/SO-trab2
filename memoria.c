@@ -136,11 +136,21 @@ void liberaMemoria (ESPACOLIVRE *noLiberto) {
             noAnterior->prox = noProx;
             free(noAtual);
             noAtual = noProx;
-            noProx = noAtual->prox;
+            if (noAtual)
+            {
+                noProx = noAtual->prox;
+            } else {
+                noProx = NULL;
+            }
             continue;
         }
         noAnterior = noAtual;
         noAtual = noAtual->prox;
-        noProx = noAtual->prox;
+        if (noAtual)
+        {
+            noProx = noAtual->prox;
+        } else {
+            noProx = NULL;
+        }
     }
 }
