@@ -74,10 +74,10 @@ int desalocaSegmento(SEGMENTOALOCADO *segmento) {
 	return segOut;
 }
 
-SEGMENTOALOCADO *buscaSegmento(int pidProcesso){
+SEGMENTOALOCADO *buscaSegmento(int pidProcesso, int numero_do_segmento){
 	SEGMENTOALOCADO *atual = inicioSegAloc->prox;
 	while(atual){
-		if(atual->pidProcesso == pidProcesso){
+		if(atual->pidProcesso == pidProcesso && atual->numSeg == numero_do_segmento){
 			return atual;
 		}
 		atual = atual->prox;

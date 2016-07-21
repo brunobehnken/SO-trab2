@@ -37,7 +37,7 @@ void menuPrincipal () {
                 printaProcessos();
                 break;
             case 6:
-                void printaIdadeSegmentos();
+                printaIdadeSegmentos();
                 break;
             default:
                 printf("Opcao invalida!\nDigite 1 para inserir um processo;\nDigite 2 para finalizar um processo;\nDigite 3 para acessar endereco real;\nDigite 4 para ver os intervalos de espaco livre na memoria principal;\nDigite 5 para ver os Processos e seus segmentos;\nDigite 6 para ver as idades dos segmentos presentes na memoria;\nDigite 0 para sair;\n");
@@ -142,7 +142,7 @@ void menuAcessaSegmento() {
         case 0:
             alocarSegmento(listaProc[indice].segTable[segmento].tamanho, pid, segmento);
         case 1:
-            somaLRU(buscaSegmento(pid));
+            somaLRU(buscaSegmento(pid, segmento));
             break;
         default:
             printf("Valor de bit de presenca nao esperado! O gerenciador de memoria vai cometer suicidio!\n");
