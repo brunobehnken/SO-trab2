@@ -113,7 +113,7 @@ void menuAcessaSegmento() {
     printf("Escolha um segmento dentre os listados abaixo:\n");
     indice = printaSegmentos(pid);
     scanf(" %d", &segmento);
-    while(!(segmento < listaProc[indice].numSeg)) {
+    while(!(segmento < listaProc[indice].segmento)) {
         printf("Valor de segmento invalido, escolha um dos valores listados:");
         printaSegmentos(pid);
         scanf(" %d", &segmento);
@@ -126,10 +126,10 @@ void menuAcessaSegmento() {
         scanf(" %d", &offset);
     }
 
-    // Aqui temos PID, numSeg e offset definidos.
-    switch(listaProc[indice].segTable[numSeg].bitPresenca) {
+    // Aqui temos PID, segmento e offset definidos.
+    switch(listaProc[indice].segTable[segmento].bitPresenca) {
         case 0:
-            alocarSegmento(listaProc[indice].segTable[segmento].tamanho, pid, numSeg);
+            alocarSegmento(listaProc[indice].segTable[segmento].tamanho, pid, segmento);
         case 1:
             somaLRU(buscaSegmento(pid));
             break;
