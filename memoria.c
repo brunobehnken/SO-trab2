@@ -41,10 +41,10 @@ ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtua
                 break;
             }
         }
-        printf("\ntamListaProc: %d\n",tamListaProc);
-        printf("indice: %d\n", indice);
-        printf("Numero de Segmentos do Processo: %d\n",listaProc[indice].numSeg);
-        printf("Base do Segmento q vai sair: %d\n",listaProc[indice].segTable[segOut].base);
+        //printf("\ntamListaProc: %d\n",tamListaProc);
+        //printf("indice: %d\n", indice);
+        //printf("Numero de Segmentos do Processo: %d\n",listaProc[indice].numSeg);
+        //printf("Base do Segmento q vai sair: %d\n",listaProc[indice].segTable[segOut].base);
         freeSegmento(listaProc[indice].segTable[segOut].base , tam); //liberando memoria
 
         listaProc[indice].segTable[segOut].bitPresenca = 0;
