@@ -15,7 +15,7 @@ void alocarSegmento (int tam, int pid, int numSeg) {
             listaProc[i].segTable[numSeg].bitPresenca = 1;
             listaProc[i].segTable[numSeg].base = match->inicio;
             listaProc[i].segTable[numSeg].tamanho = tam;
-            
+
             break;
         }
     }
@@ -61,7 +61,7 @@ ESPACOLIVRE *buscaEspacoLivre (int tam, int pid, int numSeg, ESPACOLIVRE *noAtua
 
 void freeSegmento (int base, int tam) {
     ESPACOLIVRE *noLiberto;
-    
+
     if (!(noLiberto = calloc(tam, sizeof(ESPACOLIVRE))))
     {
         printf("funcao freeSegmento: Erro ao alocar memoria do noLiberto com calloc\n");
@@ -125,5 +125,22 @@ void liberaMemoria (ESPACOLIVRE *noLiberto) {
                 }
             }
         }
+    }
+
+    noAnterior = NULL;
+    noAtual = noCabeca;
+    noProx = noAtual->prox;
+    while (noAtual) {
+        if (noAtual->inicio == noAtual->fim)
+        {
+            noAnterior->prox = noProx;
+            free(noAtual);
+            noAtual = noProx;
+            noProx = noAtual->prox;
+            continue;
+        }
+        noAnterior = noAtual;
+        noAtual = noAtual->prox;
+        noProx = noAtual->prox;
     }
 }
