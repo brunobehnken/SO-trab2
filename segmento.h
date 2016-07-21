@@ -13,7 +13,7 @@ typedef struct _SEGMENTOALOCADO
 SEGMENTOALOCADO *inicioSegAloc;
 SEGMENTOALOCADO *fimSegAloc;
 
-SEGMENTOALOCADO* criaSegmentoAlocado(int pidProcesso, int numSeg);
+SEGMENTOALOCADO *criaSegmentoAlocado(int pidProcesso, int numSeg);
 void insereSegmentoAlocado(SEGMENTOALOCADO *segmento);
 SEGMENTOALOCADO *escolheLRU();
 void somaLRU(SEGMENTOALOCADO *segmento);

@@ -2,18 +2,28 @@
 #include <stdlib.h>
 #include "memoria.h"
 #include "segmento.h"
+#include "processo.h"
 
-void alocarSegmento (int tam) {
+void alocarSegmento (int tam, int pid, int numSeg) {
+    int i;
+
     ESPACOLIVRE *match = buscaEspacoLivre(tam, noCabeca);
     match->inicio += tam;
     // marcar na tabela de segmentos que o segmento foi alocado
+    for (i = 0; i < tamListaProc; ++i)
+    {
+    	if (listaProc[i].pid == pid) {
+    		listaProc[i].segTable[numSeg].bitPresenca = 1;
+		}
+    }
 }
 
 ESPACOLIVRE *buscaEspacoLivre (int tam, ESPACOLIVRE *noAtual) {
     if (!noAtual) //memoria cheia
     {
+    	desalocaSegmento(escolheLRU());
         // chama algoritmo de realocacao
-    	
+
         return NULL;
     } else {
         if ((noAtual->fim - noAtual->inicio) >= tam) {
