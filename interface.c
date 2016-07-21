@@ -47,7 +47,7 @@ void menuPrincipal () {
 }
 
 void menuInsereProc() {
-    int pid, numSeg, *tamanhos, i;
+    int pid, numSeg, *tamanhos, i, tempTamanho, ok;
 
     printf("Digite o PID e a quantidade de segmentos: ");
     scanf(" %d %d", &pid, &numSeg);
@@ -60,8 +60,22 @@ void menuInsereProc() {
 
     for (i = 0; i < numSeg; ++i)
     {
-        printf("Digite o tamanho do segmento %d: ", i);
-        scanf(" %d", &tamanhos[i]);
+		ok = 1;
+        //scanf(" %d", &tamanhos[i]);
+        while(ok){
+			printf("Digite o tamanho do segmento %d: ", i);
+			scanf(" %d", &tempTamanho);
+			if(tempTamanho > tamanhoDaMemoria){
+				printf("Tamanho dado eh maior que a Memoria Principal! Insira outro, por favor.\n");
+			}
+			else if(tempTamanho <= 0){
+				printf("Tamanho dado eh menor ou igual a zero! Insira outro, por favor.\n");
+			}
+			else{
+				ok = 0;
+				tamanhos[i] = tempTamanho;
+			}
+		}
     }
 
     insereProcesso(criaProcesso(pid, numSeg, tamanhos));
@@ -194,6 +208,13 @@ void printaProcessos() {
 
 void printaEspacosLivres () {
     ESPACOLIVRE *noAtual = noCabeca;
+    
+    //Teste de print especial para "memoria cheia"
+    if(noAtual->inicio == tamanhoDaMemoria){
+		printf("Espacos livres: Memoria Cheia\n");
+		return;
+	}
+    
     printf("Espacos livres: (%d, %d)", noAtual->inicio, noAtual->fim);
     noAtual = noAtual->prox;
 
