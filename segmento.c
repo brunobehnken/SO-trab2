@@ -59,10 +59,18 @@ void somaLRU(SEGMENTOALOCADO *segmento) {
 int desalocaSegmento(SEGMENTOALOCADO *segmento) {
 	int segOut = segmento->numSeg;
 
-	segmento->prox->ant = segmento->ant;
+	if(segmento->prox == NULL)
+	{
+		fimSegAloc = segmento->ant;
+	}
+	else
+	{
+		segmento->prox->ant = segmento->ant;
+	}
+	
 	segmento->ant->prox = segmento->prox;
 	free(segmento);
-
+	
 	return segOut;
 }
 

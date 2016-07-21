@@ -28,16 +28,10 @@ void alocarSegmento (int tam, int pid, int numSeg) {
     {
         noAtual = noCabeca;
         noProx = noAtual->prox;
-        printf("\n>>>>>> TEM UM PANACA INICIO = FIM\n");
         while (noAtual) {
-            printf(">>>>>> PROCURANDO O PANACA DO INICIO = FIM\n");
-            printf(">>>>>> noAtual->inicio = %d; noAtual->fim = %d\n", noAtual->inicio, noAtual->fim);
-            printf(">>>>>> noCabeca->inicio = %d; noCabeca->fim = %d\n", noCabeca->inicio, noCabeca->fim);
             if (noAtual->inicio == noAtual->fim)
             {
-                printf(">>>>>> ENCONTREI O PANACA DO INICIO = FIM\n");
                 free(noAtual);
-                printf(">>>>>> noProx->inicio = %d; noProx->fim = %d\n", noProx->inicio, noProx->fim);
                 if (noAnt)
                 {
                     noAnt->prox = noProx;
@@ -47,14 +41,12 @@ void alocarSegmento (int tam, int pid, int numSeg) {
                 break;
             }
 
-            printf(">>>>>> PREPARANDO O PROXIMO LACO:\n");
             noAnt = noAtual;
             noAtual = noAtual->prox;
             if (noAtual)
             {
                 noProx = noAtual->prox;
             } else {
-                printf(">>>>>> noAtual ficou NULL!\n");
                 noProx = NULL;
             }
         }
