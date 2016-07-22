@@ -46,12 +46,27 @@ void menuPrincipal () {
     }
 }
 
+int checaPid(int pid) {
+    int i;
+
+    for (i = 0; i < tamListaProc; ++i)
+    {
+        if (listaProc[i].pid == pid)
+        {
+            // o pid jah existe
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
 void menuInsereProc() {
     int pid, numSeg, *tamanhos, i, tempTamanho, ok;
 
     printf("Digite o PID e a quantidade de segmentos: ");
     scanf(" %d %d", &pid, &numSeg);
-    while (!(pid > 0 || numSeg > 0))
+    while (!(pid > 0 || numSeg > 0) || !checaPid(pid))
     {
         printf("\t>> Valor inválido! <<\nDigite o PID e a quantidade de segmentos: ");
         scanf(" %d %d", &pid, &numSeg);
@@ -107,7 +122,7 @@ void menuRetiraProc() {
 					freeSegmento(base, tamanho);
 				}
 			}
-			
+
 			//Retira entradas do controlador de segmentos alocados em memoria (para LRU)
 			noAtual = inicioSegAloc->prox;
 			while(noAtual){
@@ -118,11 +133,10 @@ void menuRetiraProc() {
 					printf("Segmento %d do Processo de PID %d foi desalocado da memoria.\n", segOut, pid);
 					continue;
 				}
-				
+
 				noAtual = noAtual->prox;
 			}
-			
-			
+
             retiraProcesso(pid);
             printf(">> Processo %d retirado com sucesso!\n", pid);
             printaProcessos();
@@ -223,7 +237,7 @@ void printaProcessos() {
     printf("Processos no sistema:\n");
     for (i = 0; i < tamListaProc; ++i)
     {
-        printf(">> PID: %d; SEGMENTOS (bit de presenca: tamanho):\n\t", listaProc[i].pid);
+        printf(">> PID: %d; SEGMENTOS (bit de presenca:tamanho):\n\t", listaProc[i].pid);
         for (j = 0; j < listaProc[i].numSeg; ++j)
         {
             printf("%d:%d ", listaProc[i].segTable[j].bitPresenca, listaProc[i].segTable[j].tamanho);
@@ -234,13 +248,13 @@ void printaProcessos() {
 
 void printaEspacosLivres () {
     ESPACOLIVRE *noAtual = noCabeca;
-    
+
     //Teste de print especial para "memoria cheia"
     if(noAtual->inicio == tamanhoDaMemoria){
 		printf("Espacos livres: Memoria Cheia\n");
 		return;
 	}
-    
+
     printf("Espacos livres: (%d, %d)", noAtual->inicio, noAtual->fim);
     noAtual = noAtual->prox;
 

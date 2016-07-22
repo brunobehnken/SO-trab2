@@ -4,6 +4,7 @@
 #include "memoria.h"
 
 void comoUsar (char* progName, char* argumentos);
+int checaPid(int pid);
 void menuPrincipal ();
 void menuInsereProc();
 void menuRetiraProc();
