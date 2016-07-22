@@ -83,7 +83,9 @@ void menuInsereProc() {
 }
 
 void menuRetiraProc() {
-    int pid, i;
+    int pid, i, j, base, tamanho, segOut;
+    SEGMENTOALOCADO *noAtual;
+    SEGMENTOALOCADO *noOut;
 
     printf("Digite um dos PIDs listados a seguir para finaliza-lo:\n");
     printaProcessos();
@@ -97,6 +99,30 @@ void menuRetiraProc() {
     {
         if (listaProc[i].pid == pid)
         {
+			//Desaloca possíveis segmentos do processo a ser excluido que podem estar na MP
+			for(j = 0; j < listaProc[i].numSeg ; j++){
+				if(listaProc[i].segTable[j].bitPresenca){
+					base = listaProc[i].segTable[j].base;
+					tamanho = listaProc[i].segTable[j].tamanho;
+					freeSegmento(base, tamanho);
+				}
+			}
+			
+			//Retira entradas do controlador de segmentos alocados em memoria (para LRU)
+			noAtual = inicioSegAloc->prox;
+			while(noAtual){
+				if(noAtual->pidProcesso == pid){
+					noOut = noAtual;
+					noAtual = noAtual->prox;
+					segOut = desalocaSegmento(noOut);
+					printf("Segmento %d do Processo de PID %d foi desalocado da memoria.\n", segOut, pid);
+					continue;
+				}
+				
+				noAtual = noAtual->prox;
+			}
+			
+			
             retiraProcesso(pid);
             printf(">> Processo %d retirado com sucesso!\n", pid);
             printaProcessos();
